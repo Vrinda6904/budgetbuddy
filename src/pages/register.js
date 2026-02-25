@@ -26,7 +26,7 @@ const Register = () => {
       if (res.ok) {
         alert('Registration successful! You can now log in.');
         localStorage.setItem('justRegistered', 'true');
-navigate('/log');
+navigate('https://budgetbuddy-backend-13xd.onrender.com/log');
 
       } else {
         alert(data.message || 'Registration failed.');
