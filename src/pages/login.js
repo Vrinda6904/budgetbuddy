@@ -8,14 +8,17 @@ const Login = ({ setUser, navigate }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:5000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include', // ✅ REQUIRED to store session cookie
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+  'https://budgetbuddy-backend-13xd.onrender.com/login',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({ email, password }),
+  }
+);
       
 
       const data = await res.json();
