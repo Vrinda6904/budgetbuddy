@@ -11,7 +11,7 @@ app.use(express.json());
    🌐 CORS — allow YOUR Vercel site
 ========================= */
 app.use(cors({
-  origin: 'https://budgetbuddy-hazel-gamma.vercel.app',
+  origin: true,
   credentials: true
 }));
 
