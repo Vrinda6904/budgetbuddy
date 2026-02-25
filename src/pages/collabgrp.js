@@ -30,7 +30,7 @@ const CollabGroup = () => {
   const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/get-collab-group/${code}`)
+    fetch(`https://budgetbuddy-backend-13xd.onrender.com/get-collab-group/${code}`)
       .then((res) => res.json())
       .then((data) => {
         if (data) {
@@ -73,7 +73,7 @@ const CollabGroup = () => {
     }
 
     const fetchMessages = () => {
-      fetch(`http://localhost:5000/get-messages/${code}`)
+      fetch(`https://budgetbuddy-backend-13xd.onrender.com/get-messages/${code}`)
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) {
@@ -118,7 +118,7 @@ const CollabGroup = () => {
 
   const sendMessage = () => {
     const user = JSON.parse(localStorage.getItem("user"));
-    fetch("http://localhost:5000/send-message", {
+    fetch("https://budgetbuddy-backend-13xd.onrender.com/send-message", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

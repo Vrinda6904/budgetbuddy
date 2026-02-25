@@ -29,7 +29,7 @@ const Expense = ({ user }) => {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/all-expenses?user_id=${user.id}`);
+        const res = await axios.get(`https://budgetbuddy-backend-13xd.onrender.com/all-expenses?user_id=${user.id}`);
         const data = res.data;
         if (data) {
           setIncome(data.income || 0);
@@ -54,7 +54,7 @@ const Expense = ({ user }) => {
 
   const handleIncomeSave = async () => {
   try {
-    const res = await axios.post('http://localhost:5000/add-income', {
+    const res = await axios.post('https://budgetbuddy-backend-13xd.onrender.com/add-income', {
       user_id: user.id,
       amount: income
     });
@@ -63,7 +63,7 @@ const Expense = ({ user }) => {
     setIsEditingIncome(false);
 
     // ✅ no need to reset income
-    const refresh = await axios.get(`http://localhost:5000/all-expenses?user_id=${user.id}`);
+    const refresh = await axios.get(`https://budgetbuddy-backend-13xd.onrender.com/all-expenses?user_id=${user.id}`);
     setIncome(refresh.data?.income || 0);
   } catch (error) {
     console.error("Income update failed:", error.response?.data || error.message);
@@ -76,10 +76,10 @@ const Expense = ({ user }) => {
 
   const handleFixedExpensesSave = async () => {
     try {
-      await axios.post('http://localhost:5000/update-fixed-expenses', { user_id, ...fixedExpenses });
+      await axios.post('https://budgetbuddy-backend-13xd.onrender.com/update-fixed-expenses', { user_id, ...fixedExpenses });
       alert('Fixed expenses updated!');
       setIsEditingFixed(false);
-      const res = await axios.get(`http://localhost:5000/all-expenses?user_id=${user_id}`);
+      const res = await axios.get(`https://budgetbuddy-backend-13xd.onrender.com/all-expenses?user_id=${user_id}`);
       const data = res.data;
       setFixedExpenses({
         rent: data.rent || '',
@@ -99,7 +99,7 @@ const Expense = ({ user }) => {
   const handleDailyExpenseSubmit = async () => {
     try {
       const { amount, category, description } = dailyExpense;
-      await axios.post('http://localhost:5000/add-daily-expense', {
+      await axios.post('https://budgetbuddy-backend-13xd.onrender.com/add-daily-expense', {
         user_id,
         amount,
         category,

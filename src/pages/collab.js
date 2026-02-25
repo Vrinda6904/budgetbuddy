@@ -24,7 +24,7 @@ const CollaborativeBudgeting = () => {
   const user = JSON.parse(localStorage.getItem("user")); // get user from localStorage
 
   try {
-    const res = await fetch("http://localhost:5000/join-collab-group", {
+    const res = await fetch("https://budgetbuddy-backend-13xd.onrender.com/join-collab-group", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: user.id, groupCode: joinCode }),
@@ -60,7 +60,7 @@ const CollaborativeBudgeting = () => {
     
 
     try {
-      const res = await fetch("http://localhost:5000/create-collab", {
+      const res = await fetch("https://budgetbuddy-backend-13xd.onrender.com/create-collab", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // ✅ Add this line

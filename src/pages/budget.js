@@ -11,7 +11,7 @@ function Budget({ user }) {
   useEffect(() => {
     const fetchNetIncome = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/net-income', {
+        const response = await axios.get('https://budgetbuddy-backend-13xd.onrender.com/net-income', {
           params: { user_id: user?.id },
         });
         setNetIncome(response.data.netIncome);
