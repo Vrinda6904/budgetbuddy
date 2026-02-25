@@ -15,8 +15,8 @@ const MyGroups = () => {
     const fetchGroups = async () => {
       try {
         const [createdRes, joinedRes] = await Promise.all([
-          fetch(`http://localhost:5000/api/groups/${user.id}`),
-          fetch(`http://localhost:5000/api/joined-groups/${user.id}`)
+          fetch(`https://budgetbuddy-backend-13xd.onrender.com/api/groups/${user.id}`),
+          fetch(`https://budgetbuddy-backend-13xd.onrender.com/api/joined-groups/${user.id}`)
         ]);
 
         const created = await createdRes.json();
@@ -47,7 +47,7 @@ const MyGroups = () => {
   if (!window.confirm("Are you sure you want to delete this group?")) return;
 
   try {
-    const res = await fetch(`http://localhost:5000/api/groups/${groupCode}`, {
+    const res = await fetch(`https://budgetbuddy-backend-13xd.onrender.com/api/groups/${groupCode}`, {
       method: "DELETE",
     });
 
