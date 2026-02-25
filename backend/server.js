@@ -8,12 +8,34 @@ const app = express();
 app.use(express.json());
 
 /* =========================
-   🌐 CORS — allow YOUR Vercel site
+   🌐 CORS — allow frontend (Vercel + localhost)
 ========================= */
+const allowedOrigins = [
+  "https://budgetbuddy-hazel-gamma.vercel.app",
+  "http://localhost:3000"
+];
+
 app.use(cors({
-  origin: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
+
+/* ⭐ EXTRA HEADERS (fixes strict browsers) */
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 /* =========================
    🗄️ DATABASE — Railway MySQL
@@ -54,8 +76,8 @@ app.use(session({
   cookie: {
     maxAge: 1000 * 60 * 60 * 2,
     httpOnly: true,
-    secure: true,      // 🔥 required for HTTPS (Vercel)
-    sameSite: 'none'   // 🔥 required for cross-site cookies
+    secure: true,      // required for HTTPS
+    sameSite: 'none'   // required for cross-site cookies
   }
 }));
 
